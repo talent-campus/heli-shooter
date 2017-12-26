@@ -1,9 +1,6 @@
 import pygame
 import random
 
-pygame.init()
-pygame.mixer.init()
-
 Aqua = (0, 255, 255)
 Black = (0, 0, 0)
 Blue = (0, 0, 255)
@@ -20,11 +17,6 @@ Silver = (192, 192, 192)
 Teal = (0, 128, 128)
 White = (255, 255, 255)
 Yellow = (255, 255, 0)
-
-screen = pygame.display.set_mode([400, 400])
-pygame.display.set_caption(" Shooter")
-clock = pygame.time.Clock()
-bg = pygame.image.load("bg.png")
 
 
 def msg(txt, size, color, x, y):
@@ -246,12 +238,10 @@ def start():
         click = pygame.mouse.get_pressed()
 
         if 150 + 70 > c[0] > 150 and 160 + 40 > c[1] > 160:
-
             msg("Start", 30, Blue, 180, 180)
             if click[0] == 1:
                 wait = 0
         else:
-
             msg("Start", 30, Red, 180, 180)
 
         if 160 + 60 > c[0] > 160 and 230 + 40 > c[1] > 230:
@@ -260,7 +250,6 @@ def start():
                 pygame.quit()
                 quit()
         else:
-
             msg("Exit", 30, Red, 180, 240)
 
         pygame.display.update()
@@ -314,23 +303,24 @@ def Score():
         pygame.display.flip()
 
 
+pygame.init()
+pygame.mixer.init()
+screen = pygame.display.set_mode([400, 400])
+pygame.display.set_caption(" Shooter")
+clock = pygame.time.Clock()
+bg = pygame.image.load("bg.png")
+
 score = 0
+hscore = open("highscore.txt", "r")
+hi_score = int(hscore.read())
+
 run = True
 intro = True
 over = False
-hscore = open("highscore.txt", "r")
-hi_score = int(hscore.read())
+
 while run:
     clock.tick(50)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-        if event.type == pygame.KEYDOWN:
 
-            player.shoot()
-
-            if event.key == pygame.K_RETURN:
-                pause()
     if intro:
         all_sprites = pygame.sprite.Group()
         cloud = Cloud()
@@ -367,20 +357,28 @@ while run:
         boat = Boat()
         boats.add(boat)
         all_sprites.add(boat)
-
         over = False
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+        if event.type == pygame.KEYDOWN:
+            player.shoot()
+            if event.key == pygame.K_RETURN:
+                pause()
 
     all_sprites.update()
     last_shot = pygame.time.get_ticks()
     hits = pygame.sprite.groupcollide(mobs, bullets, True, True)
     if hits:
         score += 1
-
         mobgen()
+
     hits1 = pygame.sprite.spritecollide(player, mobs, True)
     if hits1:
         Score()
         mobgen()
+
     hits2 = pygame.sprite.groupcollide(boats, bullets, True, True)
     if hits2:
         score += 3
@@ -390,8 +388,8 @@ while run:
     if hits4:
         Score()
         over = True
-    screen.fill(White)
 
+    screen.fill(White)
     screen.blit(bg, [0, 0])
     all_sprites.draw(screen)
     msg("Score:" + str(score), 30, Red, 60, 30)
