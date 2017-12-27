@@ -1,22 +1,9 @@
 import pygame
 import random
 
-Aqua = (0, 255, 255)
-Black = (0, 0, 0)
-Blue = (0, 0, 255)
-Fuchsia = (255, 0, 255)
-Gray = (128, 128, 128)
-Green = (0, 128, 0)
-Lime = (0, 255, 0)
-Maroon = (128, 0, 0)
-NavyBlue = (0, 0, 128)
-Olive = (128, 128, 0)
-Purple = (128, 0, 128)
-Red = (255, 0, 0)
-Silver = (192, 192, 192)
-Teal = (0, 128, 128)
-White = (255, 255, 255)
-Yellow = (255, 255, 0)
+BLUE = (0, 0, 255)  # pygame.Color('blue')
+RED = (255, 0, 0)  # pygame.Color('red')
+WHITE = (255, 255, 255)  # pygame.Color('white')
 
 
 def msg(txt, size, color, x, y):
@@ -86,7 +73,7 @@ class Bullet(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.image.load("b.png")
         self.image.convert_alpha()
-        self.image.set_colorkey(Blue)
+        self.image.set_colorkey(BLUE)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -129,7 +116,7 @@ class Cloud(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load("cloud.png")
-        self.image.set_colorkey(Blue)
+        self.image.set_colorkey(BLUE)
         self.rect = self.image.get_rect()
         self.rect.x = 400
         self.rect.y = 40
@@ -145,7 +132,7 @@ class Ebullet(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
         self.image = pygame.image.load("b.png").convert_alpha()
-        self.image.set_colorkey(Blue)
+        self.image.set_colorkey(BLUE)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -219,14 +206,14 @@ def mobgen():
 
 def start():
     global hi_score, score
-    screen.fill(White)
+    screen.fill(WHITE)
 
-    msg("Heli Shooter", 50, Red, 200, 100)
+    msg("Heli Shooter", 50, RED, 200, 100)
     if score > hi_score:
         hscore = open("highscore.txt", "w")
         hscore.write(str(score))
         hscore.close()
-    msg("High Score:-" + str(hi_score), 20, Red, 200, 50)
+    msg("High Score:-" + str(hi_score), 20, RED, 200, 50)
 
     wait = True
     while wait:
@@ -238,26 +225,26 @@ def start():
         click = pygame.mouse.get_pressed()
 
         if 150 + 70 > c[0] > 150 and 160 + 40 > c[1] > 160:
-            msg("Start", 30, Blue, 180, 180)
+            msg("Start", 30, BLUE, 180, 180)
             if click[0] == 1:
                 wait = 0
         else:
-            msg("Start", 30, Red, 180, 180)
+            msg("Start", 30, RED, 180, 180)
 
         if 160 + 60 > c[0] > 160 and 230 + 40 > c[1] > 230:
-            msg("Exit", 30, Blue, 180, 240)
+            msg("Exit", 30, BLUE, 180, 240)
             if click[0] == 1:
                 pygame.quit()
                 quit()
         else:
-            msg("Exit", 30, Red, 180, 240)
+            msg("Exit", 30, RED, 180, 240)
 
         pygame.display.update()
 
 
 def pause():
-    screen.fill(White)
-    msg("Paused", 50, Red, 200, 100)
+    screen.fill(WHITE)
+    msg("Paused", 50, RED, 200, 100)
     pygame.display.update()
 
     wait = True
@@ -297,9 +284,9 @@ def Score():
                 elif event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
-        msg("High Score :" + str(hi_score), 25, Blue, 200, 50)
-        msg("Game Over", 30, Red, 200, 100)
-        msg("Your Score :" + str(score), 25, Blue, 200, 200)
+        msg("High Score :" + str(hi_score), 25, BLUE, 200, 50)
+        msg("Game Over", 30, RED, 200, 100)
+        msg("Your Score :" + str(score), 25, BLUE, 200, 200)
         pygame.display.flip()
 
 
@@ -389,10 +376,10 @@ while run:
         Score()
         over = True
 
-    screen.fill(White)
+    screen.fill(WHITE)
     screen.blit(bg, [0, 0])
     all_sprites.draw(screen)
-    msg("Score:" + str(score), 30, Red, 60, 30)
+    msg("Score:" + str(score), 30, RED, 60, 30)
 
     pygame.display.flip()
 
