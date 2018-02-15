@@ -19,7 +19,13 @@ You may install it like this:
 python3 -m pip install pygame --user
 ```
 
-Then run the heli_shooter program using Python, e.g.
+Clone this repository to your local disk using Git, e.g.
+```
+git clone https://github.com/talent-campus/heli-shooter.git
+cd heli-shooter
+```
+
+Then run the heli_shooter program from your terminal using Python, e.g.
 ```
 python3 heli_shooter.py
 ```
