@@ -4,7 +4,7 @@ A boat in our game.
 import pygame
 
 from .ebullet import Ebullet
-from .helper import load_image
+from ..helper import load_image
 
 
 class Boat(pygame.sprite.Sprite):

@@ -4,7 +4,7 @@ A player that plays our game. (That could be you!)
 import pygame
 
 from .bullet import Bullet
-from .helper import load_image
+from ..helper import load_image
 
 
 class Player(pygame.sprite.Sprite):

@@ -5,7 +5,7 @@ import pygame
 import random
 
 from .ebullet import Ebullet
-from .helper import load_image
+from ..helper import load_image
 
 
 class Ecopter(pygame.sprite.Sprite):

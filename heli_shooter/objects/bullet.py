@@ -1,15 +1,16 @@
 """
-A bullet of another color in our game.
+A bullet being shot in the game.
 """
 import pygame
 
-from .helper import load_image, BLUE
+from ..helper import load_image, BLUE
 
 
-class Ebullet(pygame.sprite.Sprite):
+class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, vx, vy):
         super().__init__()
-        self.image = load_image("bullet.png").convert_alpha()
+        self.image = load_image("bullet.png")
+        self.image.convert_alpha()
         self.image.set_colorkey(BLUE)
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -18,7 +19,7 @@ class Ebullet(pygame.sprite.Sprite):
         self.vy = vy
 
     def update(self):
-        if self.rect.right < 0:
-            self.kill()
         self.rect.x += self.vx
         self.rect.y += self.vy
+        if self.rect.right > 400 + 10:
+            self.kill()

@@ -4,7 +4,7 @@ A mob in our game.
 import pygame
 import random
 
-from .helper import load_image
+from ..helper import load_image
 
 
 class Mob(pygame.sprite.Sprite):

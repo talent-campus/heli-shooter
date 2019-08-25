@@ -3,7 +3,7 @@ A cloud on the sky in our game.
 """
 import pygame
 
-from .helper import load_image, BLUE
+from ..helper import load_image, BLUE
 
 
 class Cloud(pygame.sprite.Sprite):
