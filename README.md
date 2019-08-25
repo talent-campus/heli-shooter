@@ -27,7 +27,7 @@ cd heli-shooter
 
 Then run the heli_shooter program from your terminal using Python, e.g.
 ```
-python3 heli_shooter.py
+python3 -m heli_shooter
 ```
 
 How To Contribute
