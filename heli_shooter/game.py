@@ -83,7 +83,7 @@ class Game():
 
         if self.score > self.hi_score:
             hscore = open("highscore.txt", "w")
-            hscore.write(str(score))
+            hscore.write(str(self.score))
             hscore.close()
 
         self.msg("High Score:-%s" % self.hi_score, 20, RED, 200, 50)
@@ -140,7 +140,7 @@ class Game():
 
         if self.score > self.hi_score:
             hscore = open("highscore.txt", "w")
-            hscore.write(str(score))
+            hscore.write(str(self.score))
             hscore.close()
 
         while gover:
@@ -172,7 +172,7 @@ class Game():
         clock = pygame.time.Clock()
         self.bg = load_image("bg.png")
 
-        score = 0
+        self.score = 0
         try:
             hscore = open("highscore.txt", "r")
             self.hi_score = int(hscore.read())
@@ -205,7 +205,7 @@ class Game():
                 boat = Boat(self)
                 self.boats.add(boat)
                 self.all_sprites.add(boat)
-                score = 0
+                self.score = 0
                 intro = False
 
             if over:
@@ -241,7 +241,7 @@ class Game():
 
             hits = pygame.sprite.groupcollide(self.mobs, self.bullets, True, True)
             if hits:
-                score += 1
+                self.score += 1
                 self.mobgen()
 
             hits1 = pygame.sprite.spritecollide(player, self.mobs, True)
@@ -251,7 +251,7 @@ class Game():
 
             hits2 = pygame.sprite.groupcollide(self.boats, self.bullets, True, True)
             if hits2:
-                score += 3
+                self.score += 3
                 self.mobgen()
 
             hits4 = pygame.sprite.spritecollide(player, self.ebullets, True)
@@ -261,7 +261,7 @@ class Game():
 
             hits5 = pygame.sprite.groupcollide(self.bullets, self.ships, True, True)
             if hits5:
-                score += 10
+                self.score += 10
                 self.mobgen()
 
             hits6 = pygame.sprite.spritecollide(player, self.ships, False)
@@ -271,7 +271,7 @@ class Game():
 
             hits7 = pygame.sprite.groupcollide(self.bullets, self.ecopters, True, True)
             if hits7:
-                score += 5
+                self.score += 5
                 self.mobgen()
 
             hits8 = pygame.sprite.spritecollide(player, self.ecopters, False)
@@ -282,7 +282,7 @@ class Game():
             self.screen.fill(WHITE)
             self.screen.blit(self.bg, [0, 0])
             self.all_sprites.draw(self.screen)
-            self.msg("Score:" + str(score), 30, RED, 60, 30)
+            self.msg("Score:" + str(self.score), 30, RED, 60, 30)
             pygame.display.flip()
 
         pygame.quit()
