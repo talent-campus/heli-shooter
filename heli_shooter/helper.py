@@ -15,5 +15,5 @@ def load_image(filename):
     and return the pygame image object.
     """
     base_path = os.path.dirname(__file__)
-    image_path = os.path.join(base_path, filename)
+    image_path = os.path.join(base_path, 'images', filename)
     return pygame.image.load(image_path)
