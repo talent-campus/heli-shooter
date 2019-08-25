@@ -77,16 +77,26 @@ class Game():
             self.newecopter()
 
 
-    def start(self):
-        self.screen.fill(WHITE)
-        self.msg("Heli Shooter", 50, RED, 200, 100)
+    def load_hiscore(self):
+        try:
+            hscore = open("highscore.txt", "r")
+            self.hi_score = int(hscore.read())
+        except:
+            self.hi_score = 0
 
+
+    def save_hiscore(self):
         if self.score > self.hi_score:
             hscore = open("highscore.txt", "w")
             hscore.write(str(self.score))
             hscore.close()
 
-        self.msg("High Score:-%s" % self.hi_score, 20, RED, 200, 50)
+
+    def start(self):
+        self.screen.fill(WHITE)
+        self.msg("Heli Shooter", 50, RED, 200, 100)
+        self.save_hiscore()
+        self.msg("High Score: %s" % self.hi_score, 20, RED, 200, 50)
 
         wait = True
         while wait:
@@ -138,10 +148,7 @@ class Game():
     def Score(self):
         gover = True
 
-        if self.score > self.hi_score:
-            hscore = open("highscore.txt", "w")
-            hscore.write(str(self.score))
-            hscore.close()
+        self.save_hiscore()
 
         while gover:
             for event in pygame.event.get():
@@ -158,9 +165,9 @@ class Game():
                     elif event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         quit()
-            self.msg("High Score :%s" % self.hi_score, 25, BLUE, 200, 50)
+            self.msg("High Score: %s" % self.hi_score, 25, BLUE, 200, 50)
             self.msg("Game Over", 30, RED, 200, 100)
-            self.msg("Your Score :%s" % self.score, 25, BLUE, 200, 200)
+            self.msg("Your Score: %s" % self.score, 25, BLUE, 200, 200)
             pygame.display.flip()
 
 
@@ -171,13 +178,8 @@ class Game():
         pygame.display.set_caption(" Shooter")
         clock = pygame.time.Clock()
         self.bg = load_image("bg.png")
-
         self.score = 0
-        try:
-            hscore = open("highscore.txt", "r")
-            self.hi_score = int(hscore.read())
-        except:
-            self.hi_score = 0
+        self.load_hiscore()
 
         run = True
         intro = True
@@ -282,7 +284,7 @@ class Game():
             self.screen.fill(WHITE)
             self.screen.blit(self.bg, [0, 0])
             self.all_sprites.draw(self.screen)
-            self.msg("Score:" + str(self.score), 30, RED, 60, 30)
+            self.msg("Score: %s" % self.score, 30, RED, 60, 30)
             pygame.display.flip()
 
         pygame.quit()
