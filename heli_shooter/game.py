@@ -5,20 +5,10 @@ import pygame
 import random
 
 from .helper import load_image, BLUE, RED, WHITE
-from .objects import (
-    Boat,
-    Bullet,
-    Cloud,
-    Ebullet,
-    Ecopter,
-    Mob,
-    Player,
-    Ship,
-)
+from .objects import Boat, Cloud, Ecopter, Mob, Player, Ship
 
 
-class Game():
-
+class Game:
     def __init__(self):
         self.bg = None
         self.screen = None
@@ -30,7 +20,6 @@ class Game():
         self.ships = None
         self.all_sprites = None
 
-
     def msg(self, txt, size, color, x, y):
         font = pygame.font.SysFont("comicsansms", size)
         txtsurf = font.render(txt, True, color)
@@ -38,24 +27,20 @@ class Game():
         txtrect.center = x, y
         self.screen.blit(txtsurf, txtrect)
 
-
     def newmob(self):
         mob = Mob()
         self.mobs.add(mob)
         self.all_sprites.add(mob)
-
 
     def newboat(self):
         boat = Boat(self)
         self.boats.add(boat)
         self.all_sprites.add(boat)
 
-
     def newecopter(self):
         ecopter = Ecopter(self)
         self.ecopters.add(ecopter)
         self.all_sprites.add(ecopter)
-
 
     def newship(self):
         self.msg("!", 100, RED, 380, 200)
@@ -63,7 +48,6 @@ class Game():
         ship = Ship(self)
         self.ships.add(ship)
         self.all_sprites.add(ship)
-
 
     def mobgen(self):
         i = random.choice([1, 2, 3, 4])
@@ -76,21 +60,18 @@ class Game():
         if i == 4:
             self.newecopter()
 
-
     def load_hiscore(self):
         try:
             hscore = open("highscore.txt", "r")
             self.hi_score = int(hscore.read())
-        except:
+        except (OSError, IOError):
             self.hi_score = 0
-
 
     def save_hiscore(self):
         if self.score > self.hi_score:
             hscore = open("highscore.txt", "w")
             hscore.write(str(self.score))
             hscore.close()
-
 
     def start(self):
         self.screen.fill(WHITE)
@@ -125,7 +106,6 @@ class Game():
 
             pygame.display.update()
 
-
     def pause(self):
         self.screen.blit(self.bg, [0, 0])
         self.msg("Paused", 50, RED, 200, 100)
@@ -143,7 +123,6 @@ class Game():
                     elif event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         quit()
-
 
     def Score(self):
         gover = True
@@ -169,7 +148,6 @@ class Game():
             self.msg("Game Over", 30, RED, 200, 100)
             self.msg("Your Score: %s" % self.score, 25, BLUE, 200, 200)
             pygame.display.flip()
-
 
     def main(self):
         pygame.init()
@@ -239,7 +217,6 @@ class Game():
                         self.pause()
 
             self.all_sprites.update()
-            last_shot = pygame.time.get_ticks()
 
             hits = pygame.sprite.groupcollide(self.mobs, self.bullets, True, True)
             if hits:

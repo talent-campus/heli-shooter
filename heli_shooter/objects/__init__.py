@@ -10,3 +10,5 @@ from .ecopter import Ecopter
 from .mob import Mob
 from .player import Player
 from .ship import Ship
+
+__all__ = [Boat, Bullet, Cloud, Ebullet, Ecopter, Mob, Player, Ship]

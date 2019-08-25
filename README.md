@@ -33,5 +33,6 @@ python3 -m heli_shooter
 How To Contribute
 -----------------
 
-Please, fork this repository, run `flake8` before committing changes, and
-[open a pull request](https://github.com/Mariii123/heli-shooter/pulls).
+Please, fork this repository, run `black` and `flake8`
+before committing changes, and [open a pull request](
+https://github.com/Mariii123/heli-shooter/pulls).
